@@ -4,7 +4,7 @@ defmodule Letterboxd.Repo.Migrations.CreateMoviesTable do
   def up do
     create table(:movies) do
       add :title, :string
-      add :overview, :string
+      add :overview, :text
       add :release_date, :date
       add :poster_url, :string
 

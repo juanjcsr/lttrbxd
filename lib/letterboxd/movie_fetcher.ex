@@ -15,15 +15,16 @@ defmodule MovieFetcher do
 
     case response do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        IO.inspect(body["results"])
-        movie = body["results"]
-          #|> Jason.decode!()
-          #|> Map.get("results")
+        # IO.inspect(body["results"])
+        movie = body
+          |> Jason.decode!()
+          |> Map.get("results")
           #|> IO.inspect()
           #|> List.first()
           |> Enum.at(0)
           |> Map.take(["title", "overview", "release_date", "poster_path"])
-          |> Map.put("poster_path", get_poster_url(body["poster_path"]))
+          |> IO.inspect()
+          |> set_poster_url()
           #|> Map.get("id")
           #|> fetch_movie_details()
         {:ok, movie}
@@ -59,6 +60,10 @@ defmodule MovieFetcher do
         {:error, reason}
     end
 
+  end
+
+  defp set_poster_url(movie) do
+    Map.put(movie, "poster_url", get_poster_url(movie["poster_path"]))
   end
 
 

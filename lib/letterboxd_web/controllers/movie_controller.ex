@@ -16,11 +16,12 @@ defmodule LetterboxdWeb.MovieController do
   end
 
   def create(conn, %{"movie" => %{"title" => title}}) do
-
     case MovieFetcher.fetch_movie(title) do
       {:ok, movie} ->
         changeset = Movies.change_movie(%Movie{}, movie)
-        case Movies.create_movie(changeset) do
+        IO.inspect(changeset)
+        #case Movies.create_movie(changeset) do
+        case Movies.insert_movie(changeset) do
           {:ok, movie} ->
             conn
             |> put_flash(:info, "Movie created successfully.")

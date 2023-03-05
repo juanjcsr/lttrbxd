@@ -55,6 +55,11 @@ defmodule Letterboxd.Movies do
     |> Repo.insert()
   end
 
+  def insert_movie(movies) do
+    movies
+    |> Repo.insert()
+  end
+
   @doc """
   Updates a movie.
 
