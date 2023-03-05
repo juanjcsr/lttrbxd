@@ -11,11 +11,16 @@
   <tbody>
 <%= for movie <- @movies do %>
     <tr>
-      <td><%= movie.title %></td>
+      <!-- Link with anto the show page -->
 
       <td>
+        <%= link to: Routes.movie_path(@conn, :show, movie) do %>
+          <img src={movie.poster_url} alt={movie.title} width='100' height='150' />
+        <% end %>
+      </td>
+      <td>
         <span><%= link "Show", to: Routes.movie_path(@conn, :show, movie) %></span>
-        <span><%= link "Edit", to: Routes.movie_path(@conn, :edit, movie) %></span>
+        <!-- <span><%= link "Edit", to: Routes.movie_path(@conn, :edit, movie) %></span> -->
         <span><%= link "Delete", to: Routes.movie_path(@conn, :delete, movie), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
